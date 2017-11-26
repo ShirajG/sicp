@@ -66,4 +66,4 @@
       guess
       (cube-root (improve-cube guess x) x)))
 
-(cube-root 1.0 1000000)
+(cube-root 1.0 8)
