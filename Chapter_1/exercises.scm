@@ -26,44 +26,68 @@
     (square (greater a b))
     (square (greater b c))))
 
-(define (improve guess x)
-  (average guess (/ x guess)))
-
-(define (average x y)
-  (/ (+ x y) 2))
-
-(define (sqrt-iter guess x)
-  (if (good-enough? guess x)
-      guess
-      (sqrt-iter (improve guess x) x)))
-
-; Update good-enough? to use a delta to judge
-(define (good-enough? guess x)
-  (<
-   (abs (/
-     (- guess (improve guess x))
-     guess))
-   0.0001))
+(define (square-root x)
+  (define (improve guess)
+    (average guess (/ x guess)))
+  (define (average a b)
+    (/ (+ a b) 2))
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+        guess
+        (sqrt-iter (improve guess))))
+  (define (good-enough? guess)
+    (<
+     (abs (/
+       (- guess (improve guess))
+       guess))
+     0.00001))
+  (sqrt-iter 1.0)
+)
 
 ;Newton's method for cube roots
 ;x/y^2 + 2 * y
 ;-------------
 ;      3
 
-(define (improve-cube guess x)
-  (/
-   (+ (/ x (square guess))
-      (* 2 guess))
-   3))
+(define (cube-root x)
+  (define (improve guess)
+    (/
+     (+ (/ x (square guess))
+        (* 2 guess))
+     3))
+  (define (good-enough? guess)
+    (<
+     (abs (- guess (improve guess)))
+     0.0001))
+  (define (cube-root-iter guess)
+    (if (good-enough? guess)
+        guess
+        (cube-root-iter (improve guess))))
+  (cube-root-iter 1.0)
+)
 
-(define (cube-good-enough? guess x)
-  (<
-   (abs (- guess (improve-cube guess x)))
-   0.001))
+(display (cube-root 27))
+(newline)
+(display (square-root 9))
 
-(define (cube-root guess x)
-  (if (cube-good-enough? guess x)
-      guess
-      (cube-root (improve-cube guess x) x)))
 
-(cube-root 1.0 8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
