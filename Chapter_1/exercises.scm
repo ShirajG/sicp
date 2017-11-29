@@ -141,6 +141,11 @@
 ; Use induction and the definition of the Fibonacci numbers
 ; to prove that Fib(n) = (φ^n − ψ^n)/√5.
 
+; Not a math major here, going to skip this.
+; Looks like this wants you to prove the Binet formula???
+
+
+
 
 
 
