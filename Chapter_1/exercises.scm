@@ -70,22 +70,76 @@
 (newline)
 (display (square-root 9))
 
+; Ackermann Function, work through it via substitution
+; Good video: https://www.youtube.com/watch?v=i7sm9dzFtEI
+(define (A x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (A (- x 1) (A x (- y 1))))))
+; (A 1 10);
+; (A 0 (A 1 9));
+;...2^10
+
+; (A 2 4);
+; (A 1 (A 2 3))
+; (A 1 (A 1 (A 2 2)))
+; (A 1 (A 1 (A 1 (A 2 1))))
+; (A 1 (A 1 (A 1 2)))
+; (A 1 (A 1 (A 0 (A 1 1))))
+; (A 1 (A 1 4))
+; (A 1 (A 0 (A 1 3)))
+; (A 1 (A 0 (A 0 (A 1 2))))
+; (A 1 (A 0 (A 0 (A 0 (A 1 1)))))
+; (A 1 16)
+; (A 0 (A 1 15))
+;...2^16
+
+; (A 3 3)
+; (A 2 (A 3 2))
+; (A 2 (A 2 (A 3 1)))
+; (A 2 (A 2 2))
+; (A 2 (A 1 (A 2 1)))
+; (A 2 (A 1 2))
+; (A 2 (A 0 (A 1 1)))
+; (A 2 (A 0 2))
+; (A 2 4)
+; ...2^16 as per before
+
+; (define (f n) (A 0 n)) => 2n
+; (define (g n) (A 1 n)) => 2^n
+; (define (h n) (A 2 n)) => 2^...(n times)
+  ; ie: (A 2 4) => 2^2^2^2
 
 
+; Recursive Version
+(define (func1 n)
+  (if (< n 3)
+    n
+    (+ (func1 (- n 1))
+       (* 2 (func1 (- n 2)))
+       (* 3 (func1 (- n 3))))))
 
+;Pascals Triangle
+;1
+;1,1
+;1,2,1
+;1,3,3,1
+;1,4,6,4,1
+;1,5,10,10,5,1
 
+(define (pascals-triangle row col)
+  (cond ((= row 1) 1)
+        ((= col 1) 1);first el in row is always 1
+        ((= row col) 1);last element in a row is always 1
+        (else (+ (pascals-triangle (- row 1) col)
+                 (pascals-triangle (- row 1) (- col 1))))))
 
-
-
-
-
-
-
-
-
-
-
-
+; 1.13: Prove that Fib(n) is the closest integer
+; to (φ^n)/√5, where φ = (1 + √5)/2.
+; Hint: Let ψ = (1 − √5)/2.
+; Use induction and the definition of the Fibonacci numbers
+; to prove that Fib(n) = (φ^n − ψ^n)/√5.
 
 
 
