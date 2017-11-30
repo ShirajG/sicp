@@ -19,6 +19,8 @@
       (* -1 x)
       x))
 
+(define (even? x)
+  (= (remainder x 2) 0))
 (define (square x) (* x x))
 (define (greater a b) (if (> a b) a b))
 (define (sum-greatest-squares a b c)
@@ -143,6 +145,43 @@
 
 ; Not a math major here, going to skip this.
 ; Looks like this wants you to prove the Binet formula???
+
+; 1.16: Iterative algorithm for computing exponentiation using
+; successive squaring
+; Given hint: (b^n/2)^2 = (b^2)^n/2
+(define (exponent b n)
+  (exponent-iter b n 1))
+; use a to track state, ab^n should always == the initial b^n
+(define (exponent-iter b n a)
+  (newline)
+  (display a)
+  (display ':)
+  (display b)
+  (display ':)
+  (display n)
+  (newline)
+  (cond ((= n 0) 1)
+        ((= n 1) a)
+        ((even? n)(exponent-iter b (/ n 2) (* a (square b))))
+        (else (exponent-iter b (- n 1) (* a b)))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
