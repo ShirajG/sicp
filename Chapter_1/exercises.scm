@@ -150,7 +150,9 @@
 ; successive squaring
 ; Given hint: (b^n/2)^2 = (b^2)^n/2
 (define (exponent b n)
-  (exponent-iter b n 1))
+  (cond ((= n 0) 1)
+        ((= n 1) b)
+        (else (exponent-iter b n 1))))
 ; use a to track state, ab^n should always == the initial b^n
 (define (exponent-iter b n a)
   (newline)
@@ -160,8 +162,7 @@
   (display ':)
   (display n)
   (newline)
-  (cond ((= n 0) 1)
-        ((= n 1) a)
+  (cond ((= n 1) a)
         ((even? n)(exponent-iter b (/ n 2) (* a (square b))))
         (else (exponent-iter b (- n 1) (* a b)))))
 
