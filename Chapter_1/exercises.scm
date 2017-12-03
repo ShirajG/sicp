@@ -1,28 +1,27 @@
-; 5 + 4 + (2 − (3 − (6 + 4/5 )))
-; ------------------------------
-;       3(6 − 2)(2 − 7)
-
-(define dividend
-  (+ 5 4
-     ( - 2
-         (- 3
-            ( + 6
-                ( / 4 5))))))
-
-(define divisor (* 3 (- 6 2) (- 2 7)))
-
-; Exercise 1.3: Define a procedure that takes three numbers
-; as arguments and returns the sum of the squares of the two
-; larger numbers.
-
 (define (abs x)
   (if (> 0 x)
       (* -1 x)
       x))
-
 (define (even? x)
   (= (remainder x 2) 0))
+
 (define (square x) (* x x))
+(define (squares list)
+  (map square list))
+
+(define (switch-word word)
+  (cond ((or (equal? word 'I) (equal? word 'me)) 'you)
+        ((equal? word 'you) 'me)
+        (else word)))
+
+(define (switch-first-word sentence)
+  (cond ((equal? (first sentence) 'me) (cons 'I (cdr sentence)))
+        (else sentence)))
+
+(define (switch sentence)
+  (switch-first-word (map switch-word sentence)))
+
+(switch '(you think this is a test for me))
 (define (greater a b) (if (> a b) a b))
 (define (sum-greatest-squares a b c)
   (+
@@ -44,8 +43,7 @@
        (- guess (improve guess))
        guess))
      0.00001))
-  (sqrt-iter 1.0)
-)
+  (sqrt-iter 1.0))
 
 ;Newton's method for cube roots
 ;x/y^2 + 2 * y
@@ -66,12 +64,7 @@
     (if (good-enough? guess)
         guess
         (cube-root-iter (improve guess))))
-  (cube-root-iter 1.0)
-)
-
-(display (cube-root 27))
-(newline)
-(display (square-root 9))
+  (cube-root-iter 1.0))
 
 ; Ackermann Function, work through it via substitution
 ; Good video: https://www.youtube.com/watch?v=i7sm9dzFtEI
