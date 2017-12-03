@@ -28,6 +28,11 @@
     (square (greater a b))
     (square (greater b c))))
 
+(define (ordered? nums)
+  (cond ((null? (cdr nums)) #t)
+        ((> (first nums) (first (cdr nums))) #f)
+        (else (ordered? (cdr nums)))))
+
 (define (square-root x)
   (define (improve guess)
     (average guess (/ x guess)))
