@@ -30,7 +30,7 @@
 
 (define (ordered? nums)
   (cond ((null? (cdr nums)) #t)
-        ((> (first nums) (first (cdr nums))) #f)
+        ((> (car nums) (car (cdr nums))) #f)
         (else (ordered? (cdr nums)))))
 
 (define (square-root x)
