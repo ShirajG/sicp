@@ -2,11 +2,12 @@
 ; ------------------------------
 ;       3(6 − 2)(2 − 7)
 
-(define dividend (+ 5 4
-                      ( - 2
-                          (- 3
-                             ( + 6
-                                 ( / 4 5))))))
+(define dividend
+  (+ 5 4
+     ( - 2
+         (- 3
+            ( + 6
+                ( / 4 5))))))
 
 (define divisor (* 3 (- 6 2) (- 2 7)))
 
@@ -113,7 +114,6 @@
 ; (define (h n) (A 2 n)) => 2^...(n times)
   ; ie: (A 2 4) => 2^2^2^2
 
-
 ; Recursive Version
 (define (func1 n)
   (if (< n 3)
@@ -157,27 +157,6 @@
         ((even? n)(exponent-iter (square b) (/ n 2) a ))
         (else (exponent-iter b (- n 1) (* a b)))))
 
+(exponent 2 6)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+;; Section 1.3
