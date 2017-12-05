@@ -2,6 +2,13 @@
   (if (> 0 x)
       (* -1 x)
       x))
+
+(define (identity x)
+  (* 1 x))
+
+(define (increment x)
+  (+ 1 x))
+
 (define (even? x)
   (= (remainder x 2) 0))
 
@@ -173,3 +180,24 @@
 (ends-e '(please put the salami above the blue elephant))
 
 ;; Section 1.3
+;; Ex. 1.31
+;; The sum procedure is only the simplest of a vast num-
+;; ber of similar abstractions that can be captured as higher-
+;; order procedures. Write an analogous procedure called
+;; product that returns the product of the values of a
+;; function at points over a given range. Show how to de-
+;; fine factorial in terms of product . Also use product
+;; to compute approximations to π using the formula:
+;; π/4 =  2/3 * 4/3 * 4/5 * 6/5 * 6/7 * 8/7
+
+;; Start at a, use next to generate next num, continue until a hits end
+(define (product a fn next end)
+  (if (> a end)
+       1
+      (* (fn a) (product (next a) fn next end))))
+
+;; factorial in terms of product
+(define (factorial x)
+  (product 1 identity increment x))
+
+(factorial 6)
