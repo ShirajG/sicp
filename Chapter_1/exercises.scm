@@ -164,6 +164,12 @@
            (else #f)))
    sentence))
 
+(define (ends-e sentence)
+  (cond ((empty? sentence) sentence)
+        ((equal? (last (first sentence)) 'e)
+         (cons (first sentence) (ends-e (bf sentence))))
+        (else (ends-e (bf sentence)))))
+
 (ends-e '(please put the salami above the blue elephant))
 
 ;; Section 1.3
