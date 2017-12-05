@@ -157,4 +157,13 @@
 
 (exponent 2 6)
 
+(define (ends-e sentence)
+  (filter
+   (lambda (word)
+     (cond ((equal? (last word) 'e) #t)
+           (else #f)))
+   sentence))
+
+(ends-e '(please put the salami above the blue elephant))
+
 ;; Section 1.3
