@@ -192,17 +192,20 @@
 ;; t1 -> 2(floor of (t)/2) + 2)/(floor of (t+1)/2) + 2 )
 
 ;; Start at a, use next to generate next num, continue until a hits end
+
 (define (product a fn next end)
   (if (> a end)
        1
       (* (fn a) (product (next a) fn next end))))
 
 ;; factorial in terms of product
+
 (define (factorial x)
   (product 1 identity increment x))
 (factorial 4)
 
 ;; pi using the formula given
+
 (define (pi)
   (define (compute-pi-term x)
     (define (numerator x)
@@ -211,5 +214,44 @@
       ( + 3 (* 2 (floor (/ (- x 1) 2)))))
     (/ (numerator x) (denominator x)))
   (* 4.0 (product 1 compute-pi-term increment 10000)))
-
 (pi)
+
+;; Ex. 1.32a
+;; Show that sum and product (Exercise 1.31) are both
+;; special cases of a still more general notion called accumulate
+;; that combines a collection of terms, using some gen-
+;; eral accumulation function:
+;; (accumulate combiner null-value term a next b)
+(define (accumulate combiner null-value term a next b)
+  (if (> a b)
+      null-value
+      (combiner a (accumulate combiner null-value term (next a) next b))))
+
+(accumulate * 1 identity 8 increment 10)
+(accumulate + 0 identity 0 increment 10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;
