@@ -203,12 +203,13 @@
 (factorial 4)
 
 ;; pi using the formula given
-(define (compute-pi-term x)
-  (define (numerator x)
-    (+ (* 2 (floor (/ x 2))) 2))
-  (define (denominator x)
-    ( + 3 (* 2 (floor (/ (- x 1) 2)))))
-  (/ (numerator x) (denominator x)))
+(define (pi)
+  (define (compute-pi-term x)
+    (define (numerator x)
+      (+ (* 2 (floor (/ x 2))) 2))
+    (define (denominator x)
+      ( + 3 (* 2 (floor (/ (- x 1) 2)))))
+    (/ (numerator x) (denominator x)))
+  (* 4.0 (product 1 compute-pi-term increment 10000)))
 
-(define pi (* 4.0 (product 1 compute-pi-term increment 10000)))
-(* 1 pi)
+(pi)
