@@ -189,6 +189,7 @@
 ;; fine factorial in terms of product . Also use product
 ;; to compute approximations to π using the formula:
 ;; π/4 =  2/3 * 4/3 * 4/5 * 6/5 * 6/7 * 8/7
+;; t1 -> 2(floor of (t)/2) + 2)/(floor of (t+1)/2) + 2 )
 
 ;; Start at a, use next to generate next num, continue until a hits end
 (define (product a fn next end)
@@ -199,5 +200,15 @@
 ;; factorial in terms of product
 (define (factorial x)
   (product 1 identity increment x))
+(factorial 4)
 
-(factorial 6)
+;; pi using the formula given
+(define (compute-pi-term x)
+  (define (numerator x)
+    (+ (* 2 (floor (/ x 2))) 2))
+  (define (denominator x)
+    ( + 3 (* 2 (floor (/ (- x 1) 2)))))
+  (/ (numerator x) (denominator x)))
+
+(define pi (* 4.0 (product 1 compute-pi-term increment 10000)))
+(* 1 pi)
