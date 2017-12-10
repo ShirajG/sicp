@@ -230,15 +230,51 @@
 (accumulate * 1 identity 8 increment 10)
 (accumulate + 0 identity 0 increment 10)
 
+;; 1.33
+;; You can obtain an even more general ver-
+;; sion of accumulate (Exercise 1.32) by introducing the no-
+;; tion of a filter on the terms to be combined. That is, combine
+;; only those terms derived from values in the range that sat-
+;; isfy a specified condition. The resulting filtered-accumulate
+;; abstraction takes the same arguments as accumulate, to-
+;; gether with an additional predicate of one argument that
+;; specifies the filter. Write filtered-accumulate as a proce-
+;; dure.
 
+(define (filtered-accumulate filter combiner null-value term a next b)
+  (cond ((> a b)
+         null-value)
+        ((filter a)
+         (combiner a (filtered-accumulate filter combiner null-value term (next a) next b)))
+        (else (filtered-accumulate filter combiner null-value term (next a) next b))))
 
+;; the sum of the squares of the prime numbers in the interval
+;; a to b (assuming that you have a prime? predicate already written)
+(define (prime? x)
+  (define (divisible x y limit)
+    (cond ((or (= x 1) (= x 2)) #t)
+          ((= 0 (modulo x y)) #f)
+          ((> y limit) #t)
+          (else (divisible x (+ 1 y) limit))))
+  (divisible x 2 (sqrt x)))
 
+(filtered-accumulate prime? * 1 identity 1 increment 11)
 
+;; the product of all the positive integers less than n that are
+;; relatively prime to n (i.e., all positive integers i < n
+;; such that GCD(i, n) = 1).
 
+(define (gcd a b)
+  (cond ((= b 0) a)
+        (else (gcd b (modulo a b)))))
 
+(define (relatively-prime? a b)
+  (if (= (gcd a b) 1)
+      #t
+      #f))
 
-
-
+(define limit-n 6)
+(filtered-accumulate (lambda (x) (relatively-prime? x limit-n)) * 1 identity 1 increment limit-n)
 
 
 
