@@ -3,6 +3,9 @@
       (* -1 x)
       x))
 
+(define (square x)
+  (* x x))
+
 (define (identity x)
   (* 1 x))
 
@@ -276,12 +279,28 @@
 (define limit-n 6)
 (filtered-accumulate (lambda (x) (relatively-prime? x limit-n)) * 1 identity 1 increment limit-n)
 
+;; Exercise 1.41: Define a procedure double that takes a pro-
+;; cedure of one argument as argument and returns a proce-
+;; dure that applies the original procedure twice. For exam-
+;; ple, if inc is a procedure that adds 1 to its argument, then
+;; (double inc) should be a procedure that adds 2. What
+;; value is returned by
+;; (((double (double double)) inc) 5)
+;; The answer is 21
 
+(define (double func1)
+  (lambda (x) (func1(func1 x))))
 
+(((double (double double)) inc) 5)
 
+;; Let f and g be two one-argument functions.
+;; The composition f after g is defined to be the function f(g(x)).
+;; Define a procedure compose that implements composition.
+(define (compose f g)
+  (lambda (x)
+    (f (g x))))
 
-
-
+((compose square inc) 6)
 
 
 
