@@ -302,11 +302,14 @@
 
 ((compose square inc) 6)
 
+;; Exercise 1.43: If f is a numerical function and n is a posi-
+;; tive integer, then we can form the nth repeated application
+;; of f. Write a procedure that takes as inputs a procedure
+;; that computes f and a positive integer n and returns the
+;; procedure that computes the n th repeated application
+;; of f. Your procedure should be able to be used as follows:
+(define (repeated func reps)
+  (cond ((< reps 2) func)
+        (else (repeated (compose func func) (- reps 2)))))
 
-
-
-
-
-
-
-;;
+((repeated square 2) 5)
